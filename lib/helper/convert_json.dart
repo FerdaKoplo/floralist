@@ -1,4 +1,5 @@
 import 'dart:convert';
+// import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class Flower {
@@ -55,7 +56,8 @@ class Flower {
 }
 
 Future<List<Flower>> loadFlowers() async {
-  final String response = await rootBundle.loadString('flowers.json');
+  final String response = await rootBundle.loadString('json/flowers.json');
   final data = json.decode(response);
+  print('Loaded JSON: $data');
   return (data['flowers'] as List).map((f) => Flower.fromJson(f)).toList();
 }

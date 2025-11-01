@@ -20,7 +20,6 @@ class FloralistApp extends StatelessWidget {
   }
 }
 
-
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
 
