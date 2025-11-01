@@ -1,0 +1,204 @@
+{
+  "flowers": [
+    {
+      "id": 6,
+      "name": "Pink Peony",
+      "scientific_name": "Paeonia lactiflora",
+      "category": "Romantic",
+      "price": 180000,
+      "currency": "IDR",
+      "stock": 15,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/pink_peony.jpg",
+      "description": "Soft pink peonies with full, fragrant blooms that represent love and prosperity.",
+      "colors": ["pink"],
+      "origin": "China (imported)",
+      "fragrance_level": "Strong",
+      "care_tips": [
+        "Keep in cool room temperature.",
+        "Replace water every 2 days.",
+        "Trim stems and remove wilted petals."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Lavender",
+      "scientific_name": "Lavandula angustifolia",
+      "category": "Aromatic",
+      "price": 85000,
+      "currency": "IDR",
+      "stock": 35,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/lavender.jpg",
+      "description": "Known for its calming fragrance, Lavender is perfect for relaxation and aromatherapy.",
+      "colors": ["purple"],
+      "origin": "Provence, France",
+      "fragrance_level": "Strong",
+      "care_tips": [
+        "Use dry soil for potted plants.",
+        "Avoid overwatering.",
+        "Place in a sunny spot."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Baby's Breath",
+      "scientific_name": "Gypsophila paniculata",
+      "category": "Filler Flower",
+      "price": 60000,
+      "currency": "IDR",
+      "stock": 60,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/babys_breath.jpg",
+      "description": "Delicate white blossoms that add a soft touch to bouquets and arrangements.",
+      "colors": ["white"],
+      "origin": "Bandung, Indonesia",
+      "fragrance_level": "Light",
+      "care_tips": [
+        "Use clean vase with cool water.",
+        "Trim stems at angle.",
+        "Keep away from heat sources."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Blue Hydrangea",
+      "scientific_name": "Hydrangea macrophylla",
+      "category": "Elegant",
+      "price": 130000,
+      "currency": "IDR",
+      "stock": 22,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/blue_hydrangea.jpg",
+      "description": "Large blue petals symbolizing gratitude and understanding — ideal for gifts.",
+      "colors": ["blue"],
+      "origin": "Japan (imported)",
+      "fragrance_level": "Mild",
+      "care_tips": [
+        "Keep soil moist.",
+        "Avoid direct afternoon sun.",
+        "Mist leaves lightly."
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Jasmine",
+      "scientific_name": "Jasminum sambac",
+      "category": "Fragrant",
+      "price": 70000,
+      "currency": "IDR",
+      "stock": 50,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/jasmine.jpg",
+      "description": "Small, pure white blossoms known for their sweet and captivating fragrance.",
+      "colors": ["white"],
+      "origin": "Surabaya, Indonesia",
+      "fragrance_level": "Strong",
+      "care_tips": [
+        "Water regularly but avoid soggy soil.",
+        "Provide bright, indirect sunlight.",
+        "Prune to encourage new blooms."
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Marigold",
+      "scientific_name": "Tagetes erecta",
+      "category": "Festive",
+      "price": 55000,
+      "currency": "IDR",
+      "stock": 80,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/marigold.jpg",
+      "description": "Bright orange and yellow blooms that symbolize energy and creativity.",
+      "colors": ["orange", "yellow"],
+      "origin": "Bali, Indonesia",
+      "fragrance_level": "Moderate",
+      "care_tips": [
+        "Place in full sunlight.",
+        "Keep soil moderately moist.",
+        "Remove faded flowers to prolong blooming."
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Daisy",
+      "scientific_name": "Bellis perennis",
+      "category": "Cheerful",
+      "price": 65000,
+      "currency": "IDR",
+      "stock": 55,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/daisy.jpg",
+      "description": "Simple yet charming white daisies, a classic choice for bright, fresh arrangements.",
+      "colors": ["white", "yellow"],
+      "origin": "Bogor, Indonesia",
+      "fragrance_level": "Light",
+      "care_tips": [
+        "Change water daily.",
+        "Keep away from fruit to avoid ethylene exposure.",
+        "Trim stems diagonally."
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Cherry Blossom",
+      "scientific_name": "Prunus serrulata",
+      "category": "Seasonal",
+      "price": 220000,
+      "currency": "IDR",
+      "stock": 8,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/cherry_blossom.jpg",
+      "description": "Delicate pink petals that symbolize renewal and beauty — available during spring season.",
+      "colors": ["pink"],
+      "origin": "Japan (imported)",
+      "fragrance_level": "Mild",
+      "care_tips": [
+        "Keep in cool room temperature.",
+        "Do not expose to direct sunlight.",
+        "Mist flowers lightly."
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Carnation",
+      "scientific_name": "Dianthus caryophyllus",
+      "category": "Classic",
+      "price": 90000,
+      "currency": "IDR",
+      "stock": 40,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/carnation.jpg",
+      "description": "Long-lasting flowers with ruffled petals available in many colors — great for mixed bouquets.",
+      "colors": ["red", "white", "pink"],
+      "origin": "Semarang, Indonesia",
+      "fragrance_level": "Moderate",
+      "care_tips": [
+        "Replace vase water every 2 days.",
+        "Trim stems and remove lower leaves.",
+        "Keep away from heat."
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Chrysanthemum",
+      "scientific_name": "Chrysanthemum morifolium",
+      "category": "Traditional",
+      "price": 80000,
+      "currency": "IDR",
+      "stock": 38,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/chrysanthemum.jpg",
+      "description": "Symbol of longevity and joy, perfect for both gifts and ceremonies.",
+      "colors": ["yellow", "white", "purple"],
+      "origin": "Bandung, Indonesia",
+      "fragrance_level": "Light",
+      "care_tips": [
+        "Use clean vase and cool water.",
+        "Keep out of direct sunlight.",
+        "Trim stems every 2 days."
+      ]
+    }
+  ]
+}
