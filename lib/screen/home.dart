@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:floralist/helper/convert_json.dart';
+import 'package:floralist/widgets/carousel.dart';
 import 'package:floralist/widgets/flower_card.dart';
 import 'package:flutter/material.dart';
 
@@ -42,59 +44,91 @@ class Home extends StatelessWidget {
         // iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(17),
-          child: Column(
-            spacing: 30,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: FutureBuilder<List<Flower>>(
+          future: loadFlowers(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return const Center(child: Text('Error loading flowers'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No flowers found'));
+            }
+
+            final flowers = snapshot.data!;
+            final newest = flowers.take(4).toList();
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                spacing: 50,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Newest Release',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  Column(
+                      children: [
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Best Seller',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              'See All',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.pink,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 50),
+                        FlowerCarousel(flowers: flowers),
+                      ],
                   ),
-                  Text(
-                    'See All',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.pink,
-                    ),
-                  ),
+                  Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Newest Release',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                          Text(
+                            'See All',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.pink,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 250,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: newest.length,
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          itemBuilder: (context, index) =>
+                              FlowerCard(flower: newest[index]),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
-              SizedBox(
-                height: 250,
-                child: FutureBuilder<List<Flower>>(
-                  future: loadFlowers(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error loading flowers'));
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(child: Text('No flowers found'));
-                    }
-
-                    final flowers = snapshot.data!;
-                    final newest = flowers.take(4).toList();
-
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: newest.length,
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      itemBuilder: (context, index) {
-                        final flower = newest[index];
-                        return FlowerCard(flower: flower);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
