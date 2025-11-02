@@ -41,7 +41,6 @@ class Home extends StatelessWidget {
           ),
         ],
         centerTitle: true,
-        // iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: SafeArea(
         child: FutureBuilder<List<Flower>>(
@@ -60,36 +59,39 @@ class Home extends StatelessWidget {
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(18),
+
               child: Column(
-                spacing: 50,
+                // spacing: 50,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   Column(
-                      children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Best Seller',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Best Seller',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
-                            Text(
-                              'See All',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.pink,
-                              ),
+                          ),
+                          Text(
+                            'See All',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.pink,
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 50),
-                        FlowerCarousel(flowers: flowers),
-                      ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 50),
+                      FlowerCarousel(flowers: flowers),
+                    ],
                   ),
+                  const SizedBox(height: 40),
                   Column(
                     children: [
                       const Row(
@@ -113,18 +115,25 @@ class Home extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      SizedBox(
-                        height: 250,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: newest.length,
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          itemBuilder: (context, index) =>
-                              FlowerCard(flower: newest[index]),
-                        ),
+
+                      // height: 500,
+                      GridView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.only(top: 10, bottom: 20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 15,
+                              childAspectRatio: 0.68,
+                            ),
+                        itemCount: newest.length,
+                        itemBuilder: (context, index) {
+                          return FlowerCard(flower: newest[index]);
+                        },
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             );

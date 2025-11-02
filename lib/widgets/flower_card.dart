@@ -22,53 +22,66 @@ class FlowerCard extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,
-        clipBehavior: Clip.antiAlias, // ensures rounded corners for image
+        clipBehavior: Clip.antiAlias,
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 114.5,
+            Expanded(
+              flex: 5,
               child: Image.network(
                 flower.imageUrl,
                 fit: BoxFit.cover,
+                width: double.infinity,
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(12),
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    flower.name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              flex: 6,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      flower.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    flower.category,
-                    style: const TextStyle(
-                      color: Colors.pink,
-                      fontWeight: FontWeight.w400,
+                    const SizedBox(height: 4),
+                    Text(
+                      flower.category,
+                      style: const TextStyle(
+                        color: Colors.pink,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    flower.scientificName,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    rupiah.format(flower.price),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 17,
+                    const SizedBox(height: 4),
+                    Text(
+                      flower.scientificName,
+                      style: const TextStyle(color: Colors.grey),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 6),
+                    Text(
+                      rupiah.format(flower.price),
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 17,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
