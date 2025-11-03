@@ -1,18 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:floralist/helper/convert_json.dart';
+
+// import 'package:floralist/helper/convert_json.dart';
+import 'package:floralist/models/Flower.dart';
+import 'package:floralist/services/floral_service.dart';
 import 'package:floralist/widgets/carousel.dart';
 import 'package:floralist/widgets/flower_card.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  final void Function(int) onTabSelected;
+
+  const Home({super.key, required this.onTabSelected});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF8F9),
       appBar: AppBar(
-        // backgroundColor: const Color(0xFFF1F8E9),
+        backgroundColor: const Color(0xFFFFF8F9),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           spacing: 10,
@@ -44,7 +51,7 @@ class Home extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder<List<Flower>>(
-          future: loadFlowers(),
+          future: FlowerService.loadFlowers(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -67,7 +74,7 @@ class Home extends StatelessWidget {
 
                   Column(
                     children: [
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -77,14 +84,17 @@ class Home extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
-                          Text(
-                            'See All',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.pink,
-                            ),
-                          ),
+                          InkWell(
+                              onTap: () => onTabSelected(1),
+                              child: Text(
+                                'See All',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.pink,
+                                ),
+                              ),
+                          )
                         ],
                       ),
                       const SizedBox(height: 50),
@@ -94,7 +104,7 @@ class Home extends StatelessWidget {
                   const SizedBox(height: 40),
                   Column(
                     children: [
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -104,14 +114,17 @@ class Home extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
-                          Text(
-                            'See All',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.pink,
+                          InkWell(
+                            onTap: () => onTabSelected(1),
+                            child: Text(
+                              'See All',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.pink,
+                              ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -121,12 +134,12 @@ class Home extends StatelessWidget {
                         shrinkWrap: true,
                         padding: const EdgeInsets.only(top: 10, bottom: 20),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 15,
-                              mainAxisSpacing: 15,
-                              childAspectRatio: 0.68,
-                            ),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                          childAspectRatio: 0.68,
+                        ),
                         itemCount: newest.length,
                         itemBuilder: (context, index) {
                           return FlowerCard(flower: newest[index]);

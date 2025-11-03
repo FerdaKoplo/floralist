@@ -11,9 +11,11 @@ class FloralistApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return MaterialApp(
      debugShowCheckedModeBanner: false,
+
      title: 'Floralist',
      home: MainLayout(),
      routes: {
+       '/floral/list' : (context) => const FloralList(),
        '/floral/detail': (context) => const FloralDetail()
      },
    );
@@ -30,8 +32,8 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = const [
-    Home(),
+  List<Widget> get _pages => [
+    Home(onTabSelected: (index) => _onItemTapped(index)),
     FloralList(),
     Center(child: Text('Favorites')),
     Center(child: Text('Profile')),
