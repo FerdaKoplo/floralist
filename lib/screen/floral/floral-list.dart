@@ -70,8 +70,9 @@ class _FloralListState extends State<FloralList> {
                     'FLORIST',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 27,
+                      letterSpacing: 1.2,
                       fontWeight: FontWeight.bold,
+                      fontSize: 27,
                     ),
                   ),
                   SizedBox(width: 8),
@@ -79,7 +80,6 @@ class _FloralListState extends State<FloralList> {
                 ],
               ),
             ),
-
             SizedBox(
               height: 45,
               child: ListView.builder(

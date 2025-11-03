@@ -36,7 +36,9 @@ class FloralDetail extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/carts');
+            },
           ),
           IconButton(
             icon: const Icon(Icons.favorite_outline, color: Colors.black),
@@ -53,9 +55,15 @@ class FloralDetail extends StatelessWidget {
               Expanded(
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    // Add to favorites logic
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Added to Favorites')),
+                      const SnackBar(
+                        content: Text(
+                          'Added to Favorites',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        showCloseIcon: true,
+                        backgroundColor: Colors.pinkAccent,
+                      ),
                     );
                   },
                   icon: const Icon(Icons.favorite_border),
@@ -73,7 +81,15 @@ class FloralDetail extends StatelessWidget {
                   onPressed: () async {
                     await CartService.addToCart(flowerId);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Added to Cart')),
+                      const SnackBar(content: Text(
+                          'Added to Cart',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                        showCloseIcon: true,
+                        backgroundColor: Colors.pinkAccent,
+                      ),
                     );
                   },
                   icon: const Icon(Icons.shopping_cart_outlined),
@@ -103,10 +119,26 @@ class FloralDetail extends StatelessWidget {
 
             final List<Map<String, dynamic>> chipData = [
               {'label': flower.category, 'icon': null, 'bg': Colors.pink[100]},
-              {'label': flower.origin, 'icon': Icons.location_on, 'bg': Colors.pink[50]},
-              {'label': flower.fragranceLevel, 'icon': Icons.local_florist, 'bg': Colors.pink[50]},
-              {'label': flower.rating.toString(), 'icon': Icons.stars, 'bg': Colors.pink[50]},
-              {'label': flower.stock.toString(), 'icon': Icons.trending_up, 'bg': Colors.pink[50]},
+              {
+                'label': flower.origin,
+                'icon': Icons.location_on,
+                'bg': Colors.pink[50],
+              },
+              {
+                'label': flower.fragranceLevel,
+                'icon': Icons.local_florist,
+                'bg': Colors.pink[50],
+              },
+              {
+                'label': flower.rating.toString(),
+                'icon': Icons.stars,
+                'bg': Colors.pink[50],
+              },
+              {
+                'label': flower.stock.toString(),
+                'icon': Icons.trending_up,
+                'bg': Colors.pink[50],
+              },
             ];
 
             final rupiah = NumberFormat.currency(
@@ -135,7 +167,7 @@ class FloralDetail extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 16,),
+                  const SizedBox(height: 16),
                   Text(
                     flower.name,
                     style: const TextStyle(
@@ -202,7 +234,6 @@ class FloralDetail extends StatelessWidget {
                   const SizedBox(height: 16),
                   const Divider(),
 
-                  // Care Tips section
                   const Text(
                     'Care Tips',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -211,23 +242,28 @@ class FloralDetail extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: flower.careTips
-                        .map((tip) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.check, size: 16, color: Colors.pink),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              tip,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                              ),
+                        .map(
+                          (tip) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.check,
+                                  size: 16,
+                                  color: Colors.pink,
+                                ),
+                                const SizedBox(width: 6),
+                                Expanded(
+                                  child: Text(
+                                    tip,
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    )).toList(),
+                        )
+                        .toList(),
                   ),
                   const SizedBox(height: 24),
                 ],

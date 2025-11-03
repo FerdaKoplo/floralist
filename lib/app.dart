@@ -10,17 +10,17 @@ class FloralistApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
-     debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
 
-     title: 'Floralist',
-     home: MainLayout(),
-     routes: {
-       '/floral/list' : (context) => const FloralList(),
-       '/carts' : (context) => const CartScreen(),
-       '/floral/detail': (context) => const FloralDetail()
-     },
-   );
+      title: 'Floralist',
+      home: MainLayout(),
+      routes: {
+        '/floral/list': (context) => const FloralList(),
+        '/carts': (context) => const CartScreen(),
+        '/floral/detail': (context) => const FloralDetail(),
+      },
+    );
   }
 }
 

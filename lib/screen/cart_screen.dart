@@ -1,6 +1,5 @@
 import 'package:floralist/models/Flower.dart';
 import 'package:flutter/material.dart';
-import 'package:floralist/helper/convert_json.dart';
 import 'package:floralist/models/Cart.dart';
 import 'package:floralist/services/cart_service.dart';
 import 'package:floralist/services/floral_service.dart';
@@ -32,6 +31,81 @@ class _CartScreenState extends State<CartScreen> {
     _cartWithFlowerData = _loadCartWithFlowers();
   }
 
+  Future<void> _confirmAndClearCart() async {
+    final currentCart = await CartService.loadCart();
+
+    if (currentCart.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Your cart is already empty!',
+            style: TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          backgroundColor: Colors.pinkAccent,
+        ),
+      );
+      return;
+    }
+
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text(
+          'Clear Cart?',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: const Text(
+          'Are you sure you want to remove all items from your cart?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text(
+                'Cancel',
+              style: TextStyle(
+                color: Colors.black
+              ),
+            ),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.pinkAccent,
+            ),
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text(
+                'Clear',
+              style: TextStyle(
+                  color: Colors.white
+              ),
+
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      await CartService.clearCart();
+      setState(() {
+        _cartWithFlowerData = _loadCartWithFlowers();
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Cart cleared successfully!',
+            style: TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+          ),
+          backgroundColor: Colors.pinkAccent,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final formatCurrency = NumberFormat.currency(
@@ -39,6 +113,7 @@ class _CartScreenState extends State<CartScreen> {
       symbol: 'Rp ',
       decimalDigits: 0,
     );
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -57,6 +132,13 @@ class _CartScreenState extends State<CartScreen> {
             Icon(Icons.shopping_cart, color: Colors.pink, size: 25),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete_forever, color: Colors.pink),
+            tooltip: 'Clear Cart',
+            onPressed: _confirmAndClearCart,
+          ),
+        ],
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: _cartWithFlowerData,
@@ -70,8 +152,10 @@ class _CartScreenState extends State<CartScreen> {
             return const Center(child: Text('Your cart is empty.'));
           }
 
-          final grandTotal = cartData.fold<int>(0,
-                (sum, item) => sum +
+          final grandTotal = cartData.fold<int>(
+            0,
+                (sum, item) =>
+            sum +
                 ((item['flower'] as Flower).price * (item['quantity'] as int)),
           );
 
@@ -125,7 +209,6 @@ class _CartScreenState extends State<CartScreen> {
                   },
                 ),
               ),
-
               Container(
                 padding:
                 const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -161,7 +244,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
             ],
-          );;
+          );
         },
       ),
     );

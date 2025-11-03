@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-
 class CartService {
   static Future<File> _getCartFile() async {
     final dir = await getApplicationDocumentsDirectory();
@@ -51,5 +50,16 @@ class CartService {
     final cart = await loadCart();
     cart.removeWhere((item) => item.flowerId == flowerId);
     await saveCart(cart);
+  }
+
+  static Future<void> clearCart() async {
+    try {
+      final file = await _getCartFile();
+      await file.writeAsString(jsonEncode([]));
+      debugPrint('Cart cleared successfully.');
+    }
+    catch (e) {
+      debugPrint('Error clearing cart: $e');
+    }
   }
 }
