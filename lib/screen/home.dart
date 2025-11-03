@@ -40,11 +40,14 @@ class Home extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/carts');
+              },
           ),
           IconButton(
             icon: const Icon(Icons.favorite_outline, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+            },
           ),
         ],
         centerTitle: true,

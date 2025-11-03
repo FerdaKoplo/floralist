@@ -1,3 +1,4 @@
+import 'package:floralist/screen/cart_screen.dart';
 import 'package:floralist/screen/floral/floral-detail.dart';
 import 'package:floralist/screen/floral/floral-list.dart';
 import 'package:floralist/screen/home.dart';
@@ -16,6 +17,7 @@ class FloralistApp extends StatelessWidget {
      home: MainLayout(),
      routes: {
        '/floral/list' : (context) => const FloralList(),
+       '/carts' : (context) => const CartScreen(),
        '/floral/detail': (context) => const FloralDetail()
      },
    );
@@ -35,6 +37,7 @@ class _MainLayoutState extends State<MainLayout> {
   List<Widget> get _pages => [
     Home(onTabSelected: (index) => _onItemTapped(index)),
     FloralList(),
+    // const CartScreen(),
     Center(child: Text('Favorites')),
     Center(child: Text('Profile')),
   ];

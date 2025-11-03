@@ -24,4 +24,14 @@ class FlowerService {
       return null;
     }
   }
+
+  static Future<List<Flower>> searchFlowers(String query) async {
+    final flowers = await loadFlowers();
+    return flowers
+        .where((f) =>
+    f.name.toLowerCase().contains(query.toLowerCase()) ||
+        f.category.toLowerCase().contains(query.toLowerCase()) ||
+        f.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+  }
 }
